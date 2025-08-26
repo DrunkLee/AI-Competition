@@ -1,0 +1,4 @@
+# 폴더 무시
+/dacon/고객_지원_등급_분류/customer_support/
+/dacon/고객_지원_등급_분류/data/
+/dacon/고객_지원_등급_분류/__pycache__/
