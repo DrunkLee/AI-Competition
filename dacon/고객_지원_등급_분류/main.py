@@ -13,4 +13,4 @@ model = XGBC(seed=42)
 model.fit_tts(df,
                 feature_cols = feature_cols,
                 target_col = target_col,
-                threshold=0.3)
+                threshold=0.35)

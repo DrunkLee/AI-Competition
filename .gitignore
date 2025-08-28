@@ -3,3 +3,6 @@
 /dacon/고객_지원_등급_분류/data/
 /dacon/고객_지원_등급_분류/__pycache__/
 /dacon/고객_지원_등급_분류/train_results/
+/dacon/고객_지원_등급_분류/*.png
+/dacon/고객_지원_등급_분류/*.jpg
+/dacon/고객_지원_등급_분류/*.jpeg

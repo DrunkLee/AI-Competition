@@ -79,14 +79,8 @@ class XGBC:
         
         X_train, X_val, y_train, y_val = tts(X, y, test_size=threshold, random_state=self.seed, stratify=y)
         
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_train_scaled = pd.DataFrame(X_train_scaled, columns=feature_cols)
-        X_val_scaled = scaler.transform(X_val)
-        X_val_scaled = pd.DataFrame(X_val_scaled, columns=feature_cols)
-        
-        self.model.fit(X_train_scaled, y_train, eval_set=[(X_val_scaled, y_val)], verbose=False)
-        y_pred = self.model.predict(X_val_scaled, iteration_range = (0, self.model.best_iteration + 1))
+        self.model.fit(X_train, y_train, eval_set=[(X_val, y_val)], verbose=False)
+        y_pred = self.model.predict(X_val, iteration_range = (0, self.model.best_iteration + 1))
         
         self.metric.update(y_val.to_list(), y_pred)
         score = self.metric.result()
@@ -102,3 +96,10 @@ class XGBC:
         else:
             self.get_feature_importance(feature_cols)
         print("[INFO] 학습이 완료되었습니다.")
+    
+    def predict(self, test_df: pd.DataFrame, feature_cols: list) -> list:
+        print("\n[INFO] 테스트 데이터에 대한 예측을 시작합니다.")
+        X_test = test_df[feature_cols]
+        preds = self.model.predict(X_test)
+        print(f"[INFO] 예측이 완료되었습니다. 예측된 샘플 개수: {len(preds)}")
+        return preds
